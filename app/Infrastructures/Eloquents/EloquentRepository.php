@@ -4,7 +4,7 @@ namespace App\Infrastructures\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class EloquentRepository extends Model
 {
     //
 }

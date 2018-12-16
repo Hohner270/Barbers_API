@@ -161,7 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // MyProvider
-        RepositoryServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
     ],
 
     /*

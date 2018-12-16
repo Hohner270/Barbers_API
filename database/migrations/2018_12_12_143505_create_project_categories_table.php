@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTagsTable extends Migration
+class CreateProjectCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateUserTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_tags', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('project_categories', function (Blueprint $table) {
+            $table->integer('project_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateUserTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_tags');
+        Schema::dropIfExists('project_categories');
     }
 }
