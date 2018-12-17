@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domains\Account;
+namespace App\Domains\Models\Account;
 
-use App\Domains\Account\Account;
-use App\Domains\Account\AccountName;
-use App\Domains\Email\EmailAddress;
-use App\Domains\Account\AccountHashedPassword;
+use App\Domains\Models\Account\Account;
+use App\Domains\Models\Account\AccountName;
+use App\Domains\Models\Email\EmailAddress;
+use App\Domains\Models\Account\AccountHashedPassword;
 
-interface AccountRepository
+interface AccountCommandRepository
 {
     /**
      * @param AccountName $accountName

@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Domains\Account;
+namespace App\Domains\Models\Account;
 
-use App\Exceptions\InitializeException;
-
-use App\Domains\Account\AccountHashedPassword;
+use App\Domains\Models\Account\AccountHashedPassword;
 
 class AccountPassword
 {
@@ -18,8 +16,6 @@ class AccountPassword
      */
     public function __construct(string $password)
     {
-        if (! AccountSpec::canPassword($password)) throw new InitializeException('Invalid value: ' . $password);
-        if (! AccountSpec::canPasswordLength($password)) throw new InitializeException('Invalid Length: ' . $password);
         $this->password = $password;
     }
 

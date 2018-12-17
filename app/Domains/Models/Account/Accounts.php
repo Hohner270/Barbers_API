@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Account;
+namespace App\Domains\Models\Account;
 
 use Illuminate\Support\Collection;
 
-use App\Domains\Collections;
+use App\Domains\Models\Collections;
 
 class Accounts extends Collections
 {

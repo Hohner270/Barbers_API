@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Domains\Account;
+namespace App\Domains\Models\Account;
 
-use App\Exceptions\InitializeException;
-use App\Domains\Account\AccountSpec;
+use App\Domains\Models\Account\AccountSpec;
 
 class AccountName
 {
@@ -17,9 +16,6 @@ class AccountName
      */
     public function __construct(string $accountName)
     {
-        if (! AccountSpec::canAccountName($accountName)) throw new InitializeException('Invalid value: ' . $accountName);
-        if (! AccountSpec::canAccountNameLength($accountName)) throw new InitializeException('Invalid length: ' . $accountName);
-
         $this->accountName = $accountName;
     }
 

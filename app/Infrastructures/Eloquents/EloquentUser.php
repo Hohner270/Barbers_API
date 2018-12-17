@@ -6,9 +6,16 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+use App\Domains\Models\Account\Account;
+
 class EloquentUser extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
+    /**
+     * @var string
+     */
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -36,5 +43,15 @@ class EloquentUser extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public function toDomain(): Account
+    {
+        return new Account(
+            $this->id,
+            $this->emailAddress,
+            $this->accountName,
+            $this->password
+        );
     }
 }

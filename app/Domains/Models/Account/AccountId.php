@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Account;
+namespace App\Domains\Models\Account;
 
-use App\Domains\Identifier;
+use App\Domains\Models\Identifier;
 
 class AccountId extends Identifier
 {
