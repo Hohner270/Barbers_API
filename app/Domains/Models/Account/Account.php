@@ -40,8 +40,8 @@ class Account
     public function __construct(AccountId $id, AccountName $accountName, EmailAddress $emailAddress, AccountHashedPassword $password)
     {
         $this->id = $id;
-        $this->emailAddress = $emailAddress;
         $this->accountName = $accountName;
+        $this->emailAddress = $emailAddress;
         $this->password = $password;
     }
 

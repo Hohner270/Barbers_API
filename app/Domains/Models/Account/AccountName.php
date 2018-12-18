@@ -2,8 +2,6 @@
 
 namespace App\Domains\Models\Account;
 
-use App\Domains\Models\Account\AccountSpec;
-
 class AccountName
 {
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Models\Account;
+namespace App\Domains\Repositories\Account;
 
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Email\EmailAddress;
@@ -11,7 +11,7 @@ interface AccountQueryRepository
      * アプリケーションにログインしたアカウントを取得する
      * @return Account
      */
-    public function LoggedInAccount(): Account;
+    public function myAccount(): Account;
 
     /**
      * メールアドレスでアカウントを取得する
