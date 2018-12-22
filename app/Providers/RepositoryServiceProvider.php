@@ -4,11 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Domains\Repositories\Account\AccountQueryRepository;
+use App\Domains\UseCases\Account\AccountUseCaseQuery;
 use App\Infrastructures\Repositories\Applications\Auth\AuthManagerAccountRepository;
-
-use App\Domains\Repositories\Email\MailCommandRepository;
-use App\Infrastructures\Repositories\Application\Email\LaravelMailerCommandRepositoryImpl;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -29,7 +26,6 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(AccountQueryRepository::class, AuthManagerAccountRepository::class);
-        $this->app->bind(MailCommandRepository::class, LaravelMailerCommandRepositoryImpl::class);
+        $this->app->bind(AccountUseCaseQuery::class, AuthManagerAccountRepository::class);
     }
 }

@@ -38,5 +38,7 @@ class InviteAccountMailer implements EmailUseCaseCommand
         $this->mailer
             ->to($email->to()->value())
             ->send($inviteAccountMail);
+
+        return true;
     }
 }

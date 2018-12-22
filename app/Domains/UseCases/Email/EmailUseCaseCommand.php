@@ -2,6 +2,8 @@
 
 namespace App\Domains\UseCases\Email;
 
+use App\Domains\Models\Email\Email;
+
 interface EmailUseCaseCommand
 {
     /**

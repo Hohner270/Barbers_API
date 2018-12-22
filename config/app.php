@@ -150,6 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
+        // Clockwork\Support\Laravel\ClockworkServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -162,6 +163,7 @@ return [
 
         // MyProvider
         App\Providers\RepositoryServiceProvider::class,
+        App\Providers\MailServiceProvider::class,
     ],
 
     /*
