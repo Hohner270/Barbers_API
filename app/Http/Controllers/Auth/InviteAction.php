@@ -8,16 +8,21 @@ use App\Http\Controllers\Controller;
 use App\Domains\Models\Email\EmailAddress;
 use App\Domains\UseCases\Auth\InviteAccount;
 
+use App\Http\Requests\InviteAccountRequest;
 use App\Http\Responders\InviteAccountResponder;
 
 class InviteAction extends Controller
 {
     /**
-     * @param Request request->email
+     * @param InviteAccountRequest
      * @param InviteAccount アカウント招待ユースケース
+     * @param InviteAccountResponder
      */
-    public function __invoke(Request $request, InviteAccount $inviteAccount, InviteAccountResponder $inviteAccountResponder)
-    {
+    public function __invoke(
+        InviteAccountRequest $request,
+        InviteAccount $inviteAccount,
+        InviteAccountResponder $inviteAccountResponder
+    ) {
         $email = new EmailAddress($request->email);
         $isSent = $inviteAccount($email);
 
