@@ -5,12 +5,12 @@ namespace App\Domains\Models\Email;
 class EmailAddress
 {
     /**
-     * @var string $address
+     * @var string メールアドレス
      */
     private $address;
 
     /**
-     * @param string $address
+     * @param string メールアドレス
      */
     public function __construct(string $address)
     {
@@ -18,7 +18,7 @@ class EmailAddress
     }
 
     /**
-     * @return string
+     * @return string メールアドレス
      */
     public function value(): string
     {

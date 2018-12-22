@@ -9,7 +9,7 @@ use App\Domains\Models\Email\EmailAddress;
 class Email
 {
     /**
-     * @var AccountName アカウント名
+     * @var AccountName 送信者名
      */
     private $accountName;
 
@@ -24,7 +24,7 @@ class Email
     private $to;
 
     /**
-     * @param AccountName 
+     * @param AccountName 送信者名
      * @param EmailAddress 送信者メールアドレス
      * @param EmailAddress 受信者メールアドレス
      */
@@ -35,16 +35,25 @@ class Email
         $this->to = $to;
     }
 
+    /**
+     * @return AccountName 送信者名
+     */
     public function senderName(): AccountName
     {
         return $this->accountName;
     }
 
+    /**
+     * @return AccountName 送信者メールアドレス
+     */
     public function from(): EmailAddress
     {
         return $this->from;
     }
 
+    /**
+     * @return AccountName 受信者メールアドレス
+     */
     public function to(): EmailAddress
     {
         return $this->to;
