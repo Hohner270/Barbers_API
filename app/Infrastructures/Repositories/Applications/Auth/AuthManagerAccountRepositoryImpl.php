@@ -4,9 +4,9 @@ namespace App\Infrastructures\Repositories\Applications\Auth;
 
 use Illuminate\Auth\AuthManager;
 
-use App\Domains\Repositories\Account\AccountQueryRepository;
+use App\Domains\UseCases\Account\AccountUseCaseQuery;
 
-class AuthManagerAccountRepositoryImpl implements AccountQueryRepository
+class AuthManagerAccountRepositoryImpl implements AccountUseCaseQuery
 {
     private $authManager;
 

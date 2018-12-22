@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\Repositories\Account;
+namespace App\Domains\UseCases\Account;
 
 use App\Domains\Models\Account\Account;
 use App\Domains\Models\Email\EmailAddress;
 
-interface AccountQueryRepository
+interface AccountUseCaseQuery
 {
     /**
      * アプリケーションにログインしたアカウントを取得する

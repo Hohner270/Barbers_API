@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\Repositories\Email;
+namespace App\Domains\UseCases\Email;
 
-interface MailCommandRepository
+interface EmailUseCaseCommand
 {
     /**
      * @param Email Emailドメイン

@@ -2,19 +2,20 @@
 
 namespace App\Domains\UseCases\Auth;
 
+use App\Domains\Models\Email\Email;
 use App\Domains\Models\Email\EmailAddress;
 
-use App\Domains\Repositories\Email\MailCommandRepository;
-use App\Domains\Repositories\Account\AccountQueryRepository;
+use App\Domains\UseCases\Email\EmailUseCaseCommand;
+use App\Domains\UseCases\Account\AccountUseCaseQuery;
 
 class InviteAccount
 {
-    private $mailRepo;
+    private $emailCommand;
     private $accountQuery;
 
-    public function __construct(MailCommandRepository $mailCommand, AccountQueryRepository $accountQuery)
+    public function __construct(EmailUseCaseCommand $emailCommand, AccountUseCaseQuery $accountQuery)
     {
-        $this->mailCommand = $mailCommand;
+        $this->mailCommand = $emailCommand;
         $this->accountQuery = $accountQuery;
     }
 
@@ -23,11 +24,16 @@ class InviteAccount
      * @param string email
      * @return bool
      */
-    public function __invoke(EmailAddress $email): bool
+    public function __invoke(EmailAddress $to): bool
     {
-        // メール送信に必要なもの
-        // 件名・招待者・送信先アドレス
         $account = $this->accountQuery->myAccount();
-        return $this->mailCommand->send($email, $account);
+
+        $email = new Email(
+            $account->accountName()->value(),
+            $account->emailAddress()->value(),
+            $to
+        );
+
+        return $this->emailCommand->send($email);
     }
 }
