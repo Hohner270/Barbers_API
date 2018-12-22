@@ -7,6 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use App\Domains\Models\Account\Account;
+use App\Domains\Models\Account\AccountId;
+use App\Domains\Models\Account\AccountName;
+use App\Domains\Models\Account\AccountHashedPassword;
+
+use App\Domains\Models\Email\EmailAddress;
 
 class EloquentUser extends Authenticatable implements JWTSubject
 {
@@ -48,10 +53,9 @@ class EloquentUser extends Authenticatable implements JWTSubject
     public function toDomain(): Account
     {
         return new Account(
-            $this->id,
-            $this->emailAddress,
-            $this->accountName,
-            $this->password
+            new AccountId($this->id),
+            new AccountName($this->name),
+            new EmailAddress($this->email)
         );
     }
 }

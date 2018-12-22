@@ -15,7 +15,7 @@ class InviteAccount
 
     public function __construct(EmailUseCaseCommand $emailCommand, AccountUseCaseQuery $accountQuery)
     {
-        $this->mailCommand = $emailCommand;
+        $this->emailCommand = $emailCommand;
         $this->accountQuery = $accountQuery;
     }
 
@@ -29,8 +29,8 @@ class InviteAccount
         $account = $this->accountQuery->myAccount();
 
         $email = new Email(
-            $account->accountName()->value(),
-            $account->emailAddress()->value(),
+            $account->accountName(),
+            $account->emailAddress(),
             $to
         );
 

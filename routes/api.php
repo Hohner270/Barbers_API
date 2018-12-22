@@ -15,5 +15,5 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => 'api'], function ($router) {
     Route::post('/auth/login', 'Auth\\LoginAction');
-    Route::post('/users', 'Users\\RetrieveAction')->middleware('auth:api');
+    Route::post('/auth/invite', 'Auth\\InviteAction')->middleware('auth:api');
 });

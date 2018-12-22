@@ -27,22 +27,15 @@ class Account
     private $emailAddress;
 
     /**
-     * @var AccountHashedPassword $password
-     */
-    private $password;
-
-    /**
      * @param AccountId $id
      * @param AccountName $accountName
      * @param EmailAddress $emailAddress
-     * @param AccountHashedPassword $password
      */
-    public function __construct(AccountId $id, AccountName $accountName, EmailAddress $emailAddress, AccountHashedPassword $password)
+    public function __construct(AccountId $id, AccountName $accountName, EmailAddress $emailAddress)
     {
         $this->id = $id;
         $this->accountName = $accountName;
         $this->emailAddress = $emailAddress;
-        $this->password = $password;
     }
 
     /**
@@ -54,14 +47,6 @@ class Account
     }
 
     /**
-     * @return EmailAdress $emailAddress
-     */
-    public function emailAddress(): EmailAdress
-    {
-        return $this->emailAddress;
-    }
-
-    /**
      * @return AccountName $accountName
      */
     public function accountName(): AccountName
@@ -70,10 +55,10 @@ class Account
     }
 
     /**
-     * @return AccountHashedPassword $password
+     * @return EmailAdress $emailAddress
      */
-    public function password(): AccountHashedPassword
+    public function emailAddress(): EmailAddress
     {
-        return $this->password;
+        return $this->emailAddress;
     }
 }

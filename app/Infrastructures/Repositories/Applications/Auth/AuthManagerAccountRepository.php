@@ -6,7 +6,10 @@ use Illuminate\Auth\AuthManager;
 
 use App\Domains\UseCases\Account\AccountUseCaseQuery;
 
-class AuthManagerAccountRepositoryImpl implements AccountUseCaseQuery
+use App\Domains\Models\Account\Account;
+use App\Domains\Models\Email\EmailAddress;
+
+class AuthManagerAccountRepository implements AccountUseCaseQuery
 {
     private $authManager;
 
@@ -23,7 +26,7 @@ class AuthManagerAccountRepositoryImpl implements AccountUseCaseQuery
             ->toDomain();
     }
 
-    public function findByEmail(EmailAddress $email)
+    public function findByEmail(EmailAddress $email): Account
     {   
     }
 }
