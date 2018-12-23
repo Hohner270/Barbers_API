@@ -54,7 +54,8 @@
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/auth/login" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/auth/login"     -d "email"="example@exam.com" \
+    -d "password"="password" </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/auth/login");
 
 let headers = {
@@ -62,21 +63,66 @@ let headers = {
     "Content-Type": "application/json",
 }
 
+let body = JSON.stringify({
+    "email": "example@exam.com",
+    "password": "password",
+})
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "access_token": "aaaaaaaa",
+    "token_type": "bearer",
+    "expires_in": 3600
+}</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Unauthrized"
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/auth/login</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>required</td>
+<td>ログインするアカウントのメールアドレス</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>required</td>
+<td>ログインするアカウントのパスワード</td>
+</tr>
+</tbody>
+</table>
 <!-- END_a925a8d22b3615f12fca79456d286859 -->
 <!-- START_94726cef0a53b660e0f38207f65ad3e6 -->
 <h2>api/auth/invite</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/auth/invite" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/auth/invite"     -d "email"="example@exam.com" </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/auth/invite");
 
 let headers = {
@@ -84,14 +130,48 @@ let headers = {
     "Content-Type": "application/json",
 }
 
+let body = JSON.stringify({
+    "email": "example@exam.com",
+})
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (204):</p>
+</blockquote>
+<pre><code class="language-json">[]</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "failed to send invite mail"
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/auth/invite</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>required</td>
+<td>招待されるユーザーのメールアドレス</td>
+</tr>
+</tbody>
+</table>
 <!-- END_94726cef0a53b660e0f38207f65ad3e6 -->
       </div>
       <div class="dark-box">

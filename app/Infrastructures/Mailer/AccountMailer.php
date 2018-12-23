@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Infrastructures\Repositories\Application\Email;
+namespace App\Infrastructures\Mailer;
 
 use Illuminate\Mail\Mailer;
-use App\Infrastructures\Entities\Mails\Auth\InviteAccountMail;
 
-use App\Domains\UseCases\Email\EmailUseCaseCommand;
+use App\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;
 
+use App\Domains\UseCases\Accounts\AccountEmailUseCaseCommand;
 use App\Domains\Models\Email\Email;
+use App\Domains\Models\Tokens\Token;
 
-class InviteAccountMailer implements EmailUseCaseCommand
+class AccountMailer implements AccountEmailUseCaseCommand
 {
     /**
      * @var Mailer LaravelMailer
@@ -29,10 +30,11 @@ class InviteAccountMailer implements EmailUseCaseCommand
      * @param Email Emailドメイン
      * @return bool
      */
-    public function send(Email $email): bool
+    public function sendInviteMail(Email $email, Token $token): bool
     {
         $inviteAccountMail = new InviteAccountMail(
-            $email->senderName()->value()
+            $email->senderName()->value(),
+            $token->value()
         );
 
         $this->mailer

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Models\Account;
+namespace App\Domains\Models\Accounts;
 
 class AccountName
 {

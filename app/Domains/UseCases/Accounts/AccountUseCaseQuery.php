@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domains\UseCases\Account;
+namespace App\Domains\UseCases\Accounts;
 
-use App\Domains\Models\Account\Account;
+use App\Domains\Models\Accounts\Account;
 use App\Domains\Models\Email\EmailAddress;
 
 interface AccountUseCaseQuery

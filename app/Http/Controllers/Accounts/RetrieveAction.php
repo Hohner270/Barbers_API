@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Accounts;
 
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;

@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Domains\UseCases\Auth;
+namespace App\Domains\UseCases\Accounts;
 
 use App\Domains\Models\Email\Email;
 use App\Domains\Models\Email\EmailAddress;
 
-use App\Domains\UseCases\Email\EmailUseCaseCommand;
-use App\Domains\UseCases\Account\AccountUseCaseQuery;
+use App\Domains\UseCases\Accounts\AccountEmailUseCaseCommand;
+use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+
+use App\Domains\Models\Tokens\Token;
 
 class InviteAccount
 {
     private $emailCommand;
     private $accountQuery;
 
-    public function __construct(EmailUseCaseCommand $emailCommand, AccountUseCaseQuery $accountQuery)
+    public function __construct(AccountEmailUseCaseCommand $emailCommand, AccountUseCaseQuery $accountQuery)
     {
         $this->emailCommand = $emailCommand;
         $this->accountQuery = $accountQuery;
@@ -34,6 +36,8 @@ class InviteAccount
             $to
         );
 
-        return $this->emailCommand->send($email);
+        $inviteToken = new Token(uniqid(rand(), true));
+
+        return $this->emailCommand->sendInviteMail($email, $inviteToken);
     }
 }

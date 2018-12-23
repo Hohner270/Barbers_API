@@ -7,6 +7,11 @@ use Illuminate\Http\Response;
 
 class TokenResponder
 {
+    /**
+     * @param string トークン
+     * @param int トークン有効期限
+     * @return JsonResponse
+     */
     public function __invoke($token, int $ttl): JsonResponse
     {
         if (! $token) {
