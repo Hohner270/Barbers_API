@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Domains\Models\Tokens;
+namespace App\Domains\Models\Hashes;
 
-class Token
+class Hash
 {
     /**
      * JWTとは別のアプリケーションで使用するトークンの規格
      * @var string トークン
      */
-    private $token;
+    private $hash;
 
     /**
      * @param string トークンにする値
      */
     public function __construct(string $plainString)
     {
-        $this->token = password_hash($plainString, PASSWORD_BCRYPT);
+        $this->hash = password_hash($plainString, PASSWORD_BCRYPT);
     }
 
     /**
@@ -23,6 +23,6 @@ class Token
      */
     public function value(): string
     {
-        return $this->token;
+        return $this->hash;
     }
 }

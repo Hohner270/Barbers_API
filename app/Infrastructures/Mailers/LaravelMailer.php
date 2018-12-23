@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Infrastructures\Mailer;
+namespace App\Infrastructures\Mailers;
 
 use Illuminate\Mail\Mailer;
 
 use App\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;
 
-use App\Domains\UseCases\Accounts\AccountEmailUseCaseCommand;
+use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
 use App\Domains\Models\Email\Email;
 use App\Domains\Models\Tokens\Token;
 
-class AccountMailer implements AccountEmailUseCaseCommand
+class LaravelMailer implements MailerUseCaseCommand
 {
     /**
      * @var Mailer LaravelMailer

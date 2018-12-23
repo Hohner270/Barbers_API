@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Domains\Models\Email\EmailAddress;
-use App\Domains\UseCases\Accounts\InviteAccount;
+use App\Domains\UseCases\Accounts\InviteAccountUseCase;
 
 use App\Http\Requests\InviteAccountRequest;
 use App\Http\Responders\InviteAccountResponder;
@@ -25,11 +25,11 @@ class InviteAction extends Controller
      */
     public function __invoke(
         InviteAccountRequest $request,
-        InviteAccount $inviteAccount,
+        InviteAccountUseCase $inviteAccountUseCase,
         InviteAccountResponder $inviteAccountResponder
     ) {
         $email = new EmailAddress($request->email);
-        $isSent = $inviteAccount($email);
+        $isSent = $inviteAccountUseCase($email);
 
         return $inviteAccountResponder($isSent);
     }

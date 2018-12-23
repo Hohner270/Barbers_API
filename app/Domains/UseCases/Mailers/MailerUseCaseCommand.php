@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts;
+namespace App\Domains\UseCases\Mailers;
 
 use App\Domains\Models\Email\Email;
 use App\Domains\Models\Tokens\Token;
 
-interface AccountEmailUseCaseCommand
+interface MailerUseCaseCommand
 {
     /**
      * @param Email Emailドメイン
