@@ -4,9 +4,9 @@ namespace App\Infrastructures\Repositories\Applications\Auth;
 
 use Illuminate\Auth\AuthManager;
 
-use App\Domains\UseCases\Account\AccountUseCaseQuery;
+use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
-use App\Domains\Models\Account\Account;
+use App\Domains\Models\Accounts\Account;
 use App\Domains\Models\Email\EmailAddress;
 
 class AuthManagerAccountRepository implements AccountUseCaseQuery

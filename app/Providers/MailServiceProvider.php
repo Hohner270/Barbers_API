@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Domains\UseCases\Auth\InviteAccount;
-use App\Domains\UseCases\Email\EmailUseCaseCommand;
-use App\Infrastructures\Repositories\Application\Email\InviteAccountMailer;
+use App\Domains\UseCases\Accounts\InviteAccount;
+use App\Domains\UseCases\Accounts\AccountEmailUseCaseCommand;
+use App\Infrastructures\Mailer\AccountMailer;
 
 class MailServiceProvider extends ServiceProvider
 {
@@ -29,7 +29,7 @@ class MailServiceProvider extends ServiceProvider
     {
         $this->app
             ->when(InviteAccount::class)
-            ->needs(EmailUseCaseCommand::class)
-            ->give(InviteAccountMailer::class);
+            ->needs(AccountEmailUseCaseCommand::class)
+            ->give(AccountMailer::class);
     }
 }

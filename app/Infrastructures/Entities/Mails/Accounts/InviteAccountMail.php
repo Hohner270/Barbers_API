@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructures\Entities\Mails\Auth;
+namespace App\Infrastructures\Entities\Mails\Accounts;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -12,18 +12,24 @@ class InviteAccountMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * @var AccountName 送信者名
+     * @var string 送信者名
      */
     public $senderName;
+
+    /**
+     * @var string 招待トークン
+     */
+    public $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $senderName, string $token)
     {
-        
+        $this->senderName = $senderName;
+        $this->token = $token;
     }
 
     /**

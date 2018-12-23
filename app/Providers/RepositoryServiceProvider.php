@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Domains\UseCases\Account\AccountUseCaseQuery;
+use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 use App\Infrastructures\Repositories\Applications\Auth\AuthManagerAccountRepository;
 
 class RepositoryServiceProvider extends ServiceProvider

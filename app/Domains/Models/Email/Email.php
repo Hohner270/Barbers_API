@@ -2,8 +2,7 @@
 
 namespace App\Domains\Models\Email;
 
-use App\Domains\Models\Account\AccountName;
-
+use App\Domains\Models\Accounts\AccountName;
 use App\Domains\Models\Email\EmailAddress;
 
 class Email

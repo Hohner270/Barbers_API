@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Accounts;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Domains\Models\Email\EmailAddress;
-use App\Domains\UseCases\Auth\InviteAccount;
+use App\Domains\UseCases\Accounts\InviteAccount;
 
 use App\Http\Requests\InviteAccountRequest;
 use App\Http\Responders\InviteAccountResponder;

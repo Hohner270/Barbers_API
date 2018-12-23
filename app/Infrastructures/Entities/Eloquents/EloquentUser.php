@@ -6,10 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-use App\Domains\Models\Account\Account;
-use App\Domains\Models\Account\AccountId;
-use App\Domains\Models\Account\AccountName;
-use App\Domains\Models\Account\AccountHashedPassword;
+use App\Domains\Models\Accounts\Account;
+use App\Domains\Models\Accounts\AccountId;
+use App\Domains\Models\Accounts\AccountName;
+use App\Domains\Models\Accounts\AccountHashedPassword;
 
 use App\Domains\Models\Email\EmailAddress;
 
