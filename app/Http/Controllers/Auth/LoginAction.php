@@ -26,6 +26,16 @@ class LoginAction extends Controller
     }
 
     /**
+     * @bodyParam email string required ログインするアカウントのメールアドレス Example: example@exam.com
+     * @bodyParam password string required ログインするアカウントのパスワード Example: password
+     * @response 200 {
+     *  "access_token": "aaaaaaaa",
+     *  "token_type": "bearer",
+     *  "expires_in": 3600
+     * }
+     * @response 401 {
+     *  "error": "Unauthrized"
+     * }
      * @param Request
      * @param TokenResponder
      * @return JsonResponse

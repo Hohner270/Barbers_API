@@ -14,6 +14,11 @@ use App\Http\Responders\InviteAccountResponder;
 class InviteAction extends Controller
 {
     /**
+     * @bodyParam email string required 招待されるユーザーのメールアドレス Example: example@exam.com
+     * @response 204 {}
+     * @response 400 {
+     *  "error": "failed to send invite mail"
+     * }
      * @param InviteAccountRequest
      * @param InviteAccount アカウント招待ユースケース
      * @param InviteAccountResponder
