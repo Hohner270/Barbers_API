@@ -12,21 +12,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // 中間テーブル
-        Schema::table('user_roles', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->foreign('role_id')->references('id')
-                ->on('roles')->onDelete('cascade')->onUpdate('cascade');
-        });
-
         Schema::table('project_categories', function (Blueprint $table) {
             $table->foreign('project_id')->references('id')
                 ->on('projects')->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('category_id')->references('id')
                 ->on('categories')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('role_id')->references('id')
+                ->on('roles')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::table('likes', function (Blueprint $table) {

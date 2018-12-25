@@ -6,7 +6,7 @@ use Illuminate\Auth\AuthManager;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
-use App\Domains\Models\Accounts\Account;
+use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\Email\EmailAddress;
 
 class AuthManagerAccountRepository implements AccountUseCaseQuery

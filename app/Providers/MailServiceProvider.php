@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Domains\UseCases\Accounts\InviteAccount;
+use App\Domains\UseCases\Accounts\InviteAccountUseCase;
 use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
 use App\Infrastructures\Mailers\LaravelMailer;
 
@@ -28,7 +28,7 @@ class MailServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app
-            ->when(InviteAccount::class)
+            ->when(InviteAccountUseCase::class)
             ->needs(MailerUseCaseCommand::class)
             ->give(LaravelMailer::class);
     }

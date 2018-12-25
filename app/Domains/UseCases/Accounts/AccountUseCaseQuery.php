@@ -2,7 +2,7 @@
 
 namespace App\Domains\UseCases\Accounts;
 
-use App\Domains\Models\Accounts\Account;
+use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\Email\EmailAddress;
 
 interface AccountUseCaseQuery

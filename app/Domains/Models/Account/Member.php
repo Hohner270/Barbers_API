@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Domains\Models\Accounts;
+namespace App\Domains\Models\BaseAccount;
 
-use App\Domains\Models\Accounts\AccountId;
-use App\Domains\Models\Accounts\AccoutName;
-use App\Domains\Models\Accounts\AccountPassword;
-use App\Domains\Models\Accounts\AccoutHashedPassword;
+use App\Domains\Models\BaseAccount\AccountId;
+use App\Domains\Models\BaseAccount\AccoutName;
+use App\Domains\Models\BaseAccount\AccountPassword;
+use App\Domains\Models\BaseAccount\AccoutHashedPassword;
 
 use App\Domains\Models\Email\EmailAddress;
 
-class Account
+class Member
 {
     /**
      * @var AccountId $id

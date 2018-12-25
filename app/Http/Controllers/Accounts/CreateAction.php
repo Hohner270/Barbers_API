@@ -5,12 +5,26 @@ namespace App\Http\Controllers\Accounts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CreateAccountAction extends Controller
+use App\Domains\UseCases\Accounts\CreateAccountUseCase;
+
+use App\Domains\Models\Account\Guest;
+use App\Domains\Models\Account\Stylist;
+use App\Domains\Models\BaseAccount\AccountName;
+use App\Domains\Models\BaseAccount\AccountPassword;
+use App\Domains\Models\BaseAccount\AccountType;
+use App\Domains\Models\Email\EmailAddress;
+
+class CreateAction extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, CreateAccountUseCase $createAccountUseCase)
     {
-        $email = new EmailAddress($request->input('email'));
-        $accountName = new AccountName($request->input('name'));
-        $accountPassword = new Token($request->input('password'));
+        $guest = new Guest(
+            new AccountName($request->input('name')),
+            new EmailAddress($request->input('email')),
+            new AccountType(Stylist::ACCOUNT_TYPE),
+            new AccountPassword($request->input('password'))
+        );
+
+        $createAccountUseCase($guest);
     }
 }

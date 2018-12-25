@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Infrastructures\Eloquents\EloquentUser;
+use App\Infrastructures\Entities\Eloquents\EloquentUser;
 use Illuminate\Contracts\Hashing\Hasher;
 
 class UserSeeder extends Seeder
@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(EloquentUser $user, Hasher $hasher)
     {
+        $user->role_id = 1;
         $user->name = 'saiki';
         $user->email = 'saiki@saiki';
         $user->password = $hasher->make('password');

@@ -5,17 +5,17 @@ namespace App\Domains\UseCases\Accounts;
 use App\Domains\Models\Email\Email;
 use App\Domains\Models\Email\EmailAddress;
 
-use App\Domains\UseCases\Mailers\MailUseCaseCommand;
+use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
-use App\Domains\Models\Hashes\Hash;
+use App\Domains\Models\Hash;
 
 class InviteAccountUseCase
 {
     private $emailCommand;
     private $accountQuery;
 
-    public function __construct(MailUseCaseCommand $emailCommand, AccountUseCaseQuery $accountQuery)
+    public function __construct(MailerUseCaseCommand $emailCommand, AccountUseCaseQuery $accountQuery)
     {
         $this->emailCommand = $emailCommand;
         $this->accountQuery = $accountQuery;
@@ -31,7 +31,7 @@ class InviteAccountUseCase
         $account = $this->accountQuery->myAccount();
 
         $email = new Email(
-            $account->accountName(),
+            $account->name(),
             $account->emailAddress(),
             $to
         );
