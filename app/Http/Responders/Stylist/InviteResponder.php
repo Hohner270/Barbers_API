@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Responders;
+namespace App\Http\Responders\Stylist;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-class InviteAccountResponder
+class InviteResponder
 {
     /**
      * @param bool 招待メールが送信されたか

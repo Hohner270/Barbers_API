@@ -3,7 +3,9 @@
 namespace App\Infrastructures\Repositories\Eloquents;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
+
 use App\Domains\Models\Account\Guest;
+use App\Domains\Models\BaseAccount\Account;
 
 use App\Infrastructures\Entities\Eloquents\EloquentUser;
 
@@ -12,21 +14,30 @@ class EloquentAccountRepository implements AccountUseCaseCommand
     /**
      * @var EloquentUser
      */
-    private $user;
+    private $eloquentUser;
     /**
      * @param EloquentUser
      */
-    public function __construct(EloquentUser $user)
+    public function __construct(EloquentUser $eloquentUser)
     {
-        $this->user = $user;
+        $this->eloquentUser = $eloquentUser;
     }
 
-    public function save(Guest $guest)
+    public function save(Guest $guest): Account
     {
-        $this->user->role_id = $guest->accountType()->value();
-        $this->user->name = $guest->name()->value();
-        $this->user->email = $guest->emailAddress()->value();
-        $this->user->password = $guest->password()->value();
-        $this->user->save();
+        $user = $this->eloquentUser->firstOrCreate(
+            [
+                'name'     => $guest->name()->value(),
+                'email'    => $guest->emailAddress()->value(),
+            ],
+            [
+                'role_id'  => $guest->accountType()->value(),
+                'name'     => $guest->name()->value(),
+                'email'    => $guest->emailAddress()->value(),
+                'password' => $guest->password()->value(),
+            ]
+        );
+
+        return $user->toDomain();
     }
 }

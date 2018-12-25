@@ -3,13 +3,14 @@
 namespace App\Domains\UseCases\Accounts;
 
 use App\Domains\Models\Account\Guest;
+use App\Domains\Models\Account\Stylist;
 use App\Domains\Models\BaseAccount\AccountName;
 use App\Domains\Models\BaseAccount\AccountPassword;
 use App\Domains\Models\Email\EmailAddress;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
 
-class CreateAccountUseCase
+class CreateStylistUseCase
 {
     private $accountCommand;
 
@@ -18,8 +19,8 @@ class CreateAccountUseCase
         $this->accountCommand = $accountCommand;
     }
 
-    public function __invoke(Guest $guest) 
+    public function __invoke(Guest $guest): Stylist
     {
-        $this->accountCommand->save($guest);
+        return $this->accountCommand->save($guest);
     }
 }

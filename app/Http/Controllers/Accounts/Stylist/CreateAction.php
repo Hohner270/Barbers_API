@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Accounts;
+namespace App\Http\Controllers\Accounts\Stylist;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-use App\Domains\UseCases\Accounts\CreateAccountUseCase;
+use App\Http\Controllers\Controller;
+use App\Http\Responders\Stylist\CreateResponder;
+
+use App\Domains\UseCases\Accounts\CreateStylistUseCase;
 
 use App\Domains\Models\Account\Guest;
 use App\Domains\Models\Account\Stylist;
@@ -16,8 +18,11 @@ use App\Domains\Models\Email\EmailAddress;
 
 class CreateAction extends Controller
 {
-    public function __invoke(Request $request, CreateAccountUseCase $createAccountUseCase)
-    {
+    public function __invoke(
+        Request $request, 
+        CreateStylistUseCase $createStylistUseCase,
+        CreateResponder $responder
+    ) {
         $guest = new Guest(
             new AccountName($request->input('name')),
             new EmailAddress($request->input('email')),
@@ -25,6 +30,8 @@ class CreateAction extends Controller
             new AccountPassword($request->input('password'))
         );
 
-        $createAccountUseCase($guest);
+        $stylist = $createStylistUseCase($guest);
+
+        return $responder($stylist);
     }
 }

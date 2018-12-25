@@ -80,4 +80,16 @@ class Stylist implements Account
     {
         return $this->password;
     }
+
+    /**
+     * @return array Stylistの配列
+     */
+    public function toArray(): array
+    {
+        return [
+            'id'           => $this->id->value(),
+            'name'         => $this->name->value(),
+            'emailAddress' => $this->emailAddress->value(),
+        ];
+    }
 }

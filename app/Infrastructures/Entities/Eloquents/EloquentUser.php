@@ -30,7 +30,7 @@ class EloquentUser extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -58,11 +58,6 @@ class EloquentUser extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany('App\Infrastructures\Entities\Eloquents\EloquentRole');
-    }
-
     /**
      * アカウントインターフェイスを継承したドメインモデルを返却する
      * @return Account Stylist, Member
@@ -70,7 +65,7 @@ class EloquentUser extends Authenticatable implements JWTSubject
     public function toDomain(): Account
     {
         if ($this->role_id === Stylist::ACCOUNT_TYPE) {
-        return new Stylist(
+            return new Stylist(
                 new AccountId($this->id),
                 new AccountName($this->name),
                 new EmailAddress($this->email)
