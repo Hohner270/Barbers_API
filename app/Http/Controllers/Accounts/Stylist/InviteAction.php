@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Accounts;
+namespace App\Http\Controllers\Accounts\Stylist;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Domains\Models\Email\EmailAddress;
-use App\Domains\UseCases\Accounts\InviteAccount;
+use App\Domains\UseCases\Accounts\InviteStylistUseCase;
 
 use App\Http\Requests\InviteAccountRequest;
-use App\Http\Responders\InviteAccountResponder;
+use App\Http\Responders\Stylist\InviteResponder;
 
 class InviteAction extends Controller
 {
@@ -20,16 +20,16 @@ class InviteAction extends Controller
      *  "error": "failed to send invite mail"
      * }
      * @param InviteAccountRequest
-     * @param InviteAccount アカウント招待ユースケース
-     * @param InviteAccountResponder
+     * @param InviteStylistUseCase アカウント招待ユースケース
+     * @param InviteStylistResponder
      */
     public function __invoke(
         InviteAccountRequest $request,
-        InviteAccount $inviteAccount,
+        InviteStylistUseCase $inviteAccountUseCase,
         InviteAccountResponder $inviteAccountResponder
     ) {
         $email = new EmailAddress($request->email);
-        $isSent = $inviteAccount($email);
+        $isSent = $inviteAccountUseCase($email);
 
         return $inviteAccountResponder($isSent);
     }

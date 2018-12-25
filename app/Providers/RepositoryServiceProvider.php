@@ -7,6 +7,9 @@ use Illuminate\Support\ServiceProvider;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 use App\Infrastructures\Repositories\Applications\Auth\AuthManagerAccountRepository;
 
+use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
+use App\Infrastructures\Repositories\Eloquents\EloquentAccountRepository;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -27,5 +30,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(AccountUseCaseQuery::class, AuthManagerAccountRepository::class);
+        $this->app->bind(AccountUseCaseCommand::class, EloquentAccountRepository::class);
     }
 }
