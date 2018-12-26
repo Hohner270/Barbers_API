@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts;
+namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Models\Account\Guest;
 use App\Domains\Models\Account\Stylist;

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Stylists;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+
+use App\Http\Responders\Stylists\CreateStylistResponder;
 
 class CreateStylistRequest extends FormRequest
 {
@@ -23,19 +25,20 @@ class CreateStylistRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'token'                 => 'required',
             'name'                  => 'required',
-            'email'                 => 'required|email|max:255',
+            'email'                 => 'required|max:255|email|unique:users,email',
             'password'              => 'required|min:8|max:60|confirmed',
             'password_confirmation' => 'required',
         ];
     }
 
-    public function failedValidation(Validator $validator)
+    protected function failedValidation(Validator $validator)
     {
-        
+        $responder = \App::make(CreateStylistResponder::class);
+        throw new HttpResponseException($responder(null));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\UseCases\Accounts;
+namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Models\Email\Email;
 use App\Domains\Models\Email\EmailAddress;
@@ -10,7 +10,7 @@ use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
 use App\Domains\Models\Hash;
 
-class InviteAccountUseCase
+class InviteStylistUseCase
 {
     private $emailCommand;
     private $accountQuery;

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Responders\Stylist;
+namespace App\Http\Responders\Stylists;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 use App\Domains\Models\Account\Stylist;
 
-class CreateResponder
+class CreateStylistResponder
 {
     /**
      * @param Stylist Accountインターフェイス継承クラス | NULL

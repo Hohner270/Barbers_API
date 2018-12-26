@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Accounts\Stylist;
+namespace App\Http\Controllers\Accounts\Stylists;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Domains\Models\Email\EmailAddress;
-use App\Domains\UseCases\Accounts\InviteStylistUseCase;
+use App\Http\Requests\Stylists\InviteStylistRequest;
+use App\Http\Responders\Stylists\InviteStylistResponder;
 
-use App\Http\Requests\InviteAccountRequest;
-use App\Http\Responders\Stylist\InviteResponder;
+use App\Domains\Models\Email\EmailAddress;
+use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
+
 
 class InviteAction extends Controller
 {
@@ -19,18 +20,18 @@ class InviteAction extends Controller
      * @response 400 {
      *  "error": "failed to send invite mail"
      * }
-     * @param InviteAccountRequest
+     * @param InviteStylistRequest
      * @param InviteStylistUseCase アカウント招待ユースケース
      * @param InviteStylistResponder
      */
     public function __invoke(
-        InviteAccountRequest $request,
-        InviteStylistUseCase $inviteAccountUseCase,
-        InviteAccountResponder $inviteAccountResponder
+        InviteStylistRequest $request,
+        InviteStylistUseCase $inviteStylistUseCase,
+        InviteStylistResponder $inviteStylistResponder
     ) {
         $email = new EmailAddress($request->email);
-        $isSent = $inviteAccountUseCase($email);
+        $isSent = $inviteStylistUseCase($email);
 
-        return $inviteAccountResponder($isSent);
+        return $inviteStylistResponder($isSent);
     }
 }

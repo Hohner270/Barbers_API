@@ -29,12 +29,10 @@ class EloquentAccountRepository implements AccountUseCaseCommand
             [
                 'name'     => $guest->name()->value(),
                 'email'    => $guest->emailAddress()->value(),
+                'password' => $guest->password()->value(),
             ],
             [
                 'role_id'  => $guest->accountType()->value(),
-                'name'     => $guest->name()->value(),
-                'email'    => $guest->emailAddress()->value(),
-                'password' => $guest->password()->value(),
             ]
         );
 
