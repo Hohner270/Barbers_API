@@ -9,7 +9,7 @@ use App\Domains\Models\Account\Guest;
 use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\BaseAccount\AccountId;
 use App\Domains\Models\Email\EmailAddress;
-use App\Domains\Models\Hash;
+use App\Domains\Models\BaseToken\HashedToken;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
 
@@ -46,58 +46,42 @@ class EloquentAccountCommandRepository implements AccountUseCaseCommand
      */
     public function save(Guest $guest): Account
     {
-        DB::beginTransaction();
-        try {
-            $user = $this->eloquentUser->firstOrCreate(
-                [
-                    'name'     => $guest->name()->value(),
-                    'email'    => $guest->emailAddress()->value(),
-                    'password' => $guest->password()->value(),
-                ],
-                [
-                    'role_id'  => $guest->accountType()->value(),
-                ]
-            );
-            DB::commit();
-            return $user->toDomain();
-        } catch (\PDOException $e) {
-            DB::rollBack();
-            // TODO:ログに吐き出す
-            return false;
-        }
+        $user = $this->eloquentUser->firstOrCreate(
+            [
+                'name'     => $guest->name()->value(),
+                'email'    => $guest->emailAddress()->value(),
+                'password' => $guest->password()->value(),
+            ],
+            [
+                'role_id'  => $guest->accountType()->value(),
+            ]
+        );
+
+        return $user->toDomain();
     }
 
     /**
      * @param AccountId 招待者のアカウントID
      * @param EmailAddress 招待したメールアドレス
-     * @param Hash 招待トークン
+     * @param HashedToken 招待トークン
      * @return bool DB保存 成功 / 失敗
      */
-    public function saveInvitationToken(AccountId $accountId, EmailAddress $emailAddress, Hash $token): bool
-    {
-        DB::beginTransaction();
-        try {
-            $invitationToken = $this->eloquentInvitationToken->firstOrNew(
-                [
-                    'user_id' => $accountId->value(),
-                    'email' => $emailAddress->value(),
-                    'token' => $token->value(),
-                ]
-            );
+    public function saveInvitationToken(
+        AccountId $accountId, 
+        EmailAddress $emailAddress, 
+        HashedToken $token
+    ): bool {
+        $invitationToken = $this->eloquentInvitationToken->firstOrNew([
+                'user_id' => $accountId->value(),
+                'email' => $emailAddress->value(),
+                'token' => $token->value(),
+        ]);
 
-            if (! $invitationToken->wasRecentlyCreated) {
-                $invitationToken->updated_at = Carbon::now();
-            }
-
-            $isSaved = $invitationToken->save();
-            DB::commit();
-            return $isSaved;
-
-        } catch(\PDOException $e) {
-            DB::rollBack();
-            // TODO:ログに吐き出す
-            return false;
+        if (! $invitationToken->wasRecentlyCreated) {
+            $invitationToken->updated_at = Carbon::now();
         }
 
+        $isSaved = $invitationToken->save();
+        return $isSaved;
     }
 }

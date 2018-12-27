@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
     public function run(EloquentUser $user, Hasher $hasher)
     {
         $user->role_id = 1;
-        $user->name = 'saiki';
-        $user->email = 'saiki@saiki';
+        $user->name = 'ore';
+        $user->email = 'ore@ore.com';
         $user->password = $hasher->make('password');
         $user->save();
     }

@@ -36,8 +36,8 @@ class InviteAction extends Controller
         InviteStylistResponder $inviteStylistResponder
     ) {
         $email = new EmailAddress($request->email);
-        $invitationToken = $inviteStylistUseCase($email);
+        $token = $inviteStylistUseCase($email);
 
-        return $inviteStylistResponder($invitationToken);
+        return $inviteStylistResponder($token->value());
     }
 }
