@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\JWTGuard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Responders\TokenResponder;
+
+use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
+use App\Domains\Models\BaseAccount\AccountPassword;
+use App\Domains\Models\Email\EmailAddress;
 
 class LoginAction extends Controller
 {
@@ -33,25 +38,28 @@ class LoginAction extends Controller
      *  "token_type": "bearer",
      *  "expires_in": 3600
      * }
-     * @response 401 {
-     *  "error": "Unauthrized"
+     * @response 400 {
+     *  "message": ""
      * }
-     * @param Request
+     * @param LoginRequest
      * @param TokenResponder
      * @return JsonResponse
      */
-    public function __invoke(Request $request, TokenResponder $responder): JsonResponse
+    public function __invoke(
+        LoginRequest $request, 
+        TokenResponder $responder,
+        AccountUseCaseQuery $accountUseCaseQuery
+    ): JsonResponse
     {
-        $guard = $this->authManager->guard('api');
+        $token = $accountUseCaseQuery->login(
+            new EmailAddress($request->email),
+            new AccountPassword($request->password)
+        );
         
-        $token = $guard->attempt([
-            'email'    => $request->email,
-            'password' => $request->password,
-        ]);
-
         return $responder(
             $token,
-            $guard->factory()->getTTL() * 60
+            60 * 60
+            // $guard->factory()->getTTL() * 60
         );
     }
 }

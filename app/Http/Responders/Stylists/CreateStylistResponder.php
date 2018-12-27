@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Responders\Stylist;
+namespace App\Http\Responders\Stylists;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 use App\Domains\Models\Account\Stylist;
 
-class CreateResponder
+class CreateStylistResponder
 {
     /**
      * @param Stylist Accountインターフェイス継承クラス | NULL
@@ -18,7 +18,7 @@ class CreateResponder
         if (! $stylist) {
             return new JsonResponse(
                 [
-                    'error' => 'failed to create stylist account',
+                    'message' => 'failed to create stylist account',
                 ], 
                 Response::HTTP_BAD_REQUEST
             );

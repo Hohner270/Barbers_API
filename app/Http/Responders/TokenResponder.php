@@ -17,7 +17,7 @@ class TokenResponder
         if (! $token) {
             return new JsonResponse(
                 [
-                    'error' => 'Unauthrized',
+                    'message' => 'Unauthrized',
                 ], 
                 Response::HTTP_UNAUTHORIZED
             );

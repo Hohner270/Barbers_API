@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Accounts\Stylist;
+namespace App\Http\Controllers\Accounts\Stylists;
 
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Http\Responders\Stylist\CreateResponder;
+use App\Http\Requests\Stylists\CreateStylistRequest;
+use App\Http\Responders\Stylists\CreateStylistResponder;
 
-use App\Domains\UseCases\Accounts\CreateStylistUseCase;
+use App\Domains\UseCases\Accounts\Stylists\CreateStylistUseCase;
 
 use App\Domains\Models\Account\Guest;
 use App\Domains\Models\Account\Stylist;
@@ -19,9 +20,9 @@ use App\Domains\Models\Email\EmailAddress;
 class CreateAction extends Controller
 {
     public function __invoke(
-        Request $request, 
+        CreateStylistRequest $request, 
         CreateStylistUseCase $createStylistUseCase,
-        CreateResponder $responder
+        CreateStylistResponder $responder
     ) {
         $guest = new Guest(
             new AccountName($request->input('name')),

@@ -22,6 +22,11 @@ class InviteAccountMail extends Mailable
     public $token;
 
     /**
+     * @var string 登録画面URL
+     */
+    public $createStylistUrl = 'https://';
+
+    /**
      * Create a new message instance.
      *
      * @return void

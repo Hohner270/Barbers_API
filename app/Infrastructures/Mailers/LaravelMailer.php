@@ -4,11 +4,11 @@ namespace App\Infrastructures\Mailers;
 
 use Illuminate\Mail\Mailer;
 
-use App\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;
+use App\Domains\Models\Email\Email;
+use App\Domains\Models\BaseToken\HashedToken;
 
 use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
-use App\Domains\Models\Email\Email;
-use App\Domains\Models\Hash;
+use App\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;
 
 class LaravelMailer implements MailerUseCaseCommand
 {
@@ -30,11 +30,11 @@ class LaravelMailer implements MailerUseCaseCommand
      * @param Email Emailドメイン
      * @return bool
      */
-    public function sendInviteMail(Email $email, Hash $inviteToken): bool
+    public function sendInviteMail(Email $email, HashedToken $token): bool
     {
         $inviteAccountMail = new InviteAccountMail(
             $email->senderName()->value(),
-            $inviteToken->value()
+            $token->value()
         );
 
         $this->mailer

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Stylists;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-use App\Http\Responders\InviteAccountResponder;
+use App\Http\Responders\Stylists\InviteStylistResponder;
 
-class InviteAccountRequest extends FormRequest
+class InviteStylistRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,13 +32,13 @@ class InviteAccountRequest extends FormRequest
         ];
     }
 
-    /**
-     * バリデーション失敗時、json返却
-     * @param Validator
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $responder = \App::make(InviteAccountResponder::class);
-        throw new HttpResponseException($responder(false));
-    }
+    // /**
+    //  * バリデーション失敗時、json返却
+    //  * @param Validator
+    //  */
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     $responder = \App::make(InviteStylistResponder::class);
+    //     throw new HttpResponseException($responder(false));
+    // }
 }
