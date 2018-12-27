@@ -33,8 +33,8 @@ class LoginAction extends Controller
      *  "token_type": "bearer",
      *  "expires_in": 3600
      * }
-     * @response 401 {
-     *  "error": "Unauthrized"
+     * @response 400 {
+     *  "message": ""
      * }
      * @param Request
      * @param TokenResponder

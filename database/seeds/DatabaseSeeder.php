@@ -59,5 +59,10 @@ class DatabaseSeeder extends Seeder
             $table->foreign('repository_id')->references('id')
                 ->on('repositories')->onDelete('cascade')->onUpdate('cascade');
         });
+
+        Schema::table('invitation_tokens', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 }

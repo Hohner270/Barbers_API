@@ -9,18 +9,44 @@ use App\Domains\Models\BaseAccount\AccountPassword;
 use App\Domains\Models\Email\EmailAddress;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
+use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 
 class CreateStylistUseCase
 {
+    /**
+     * @var AccountUseCaseCommand アカウント操作UseCase
+     */
     private $accountCommand;
 
-    public function __construct(AccountUseCaseCommand $accountCommand)
-    {
+    /**
+     * @var AccountUseCaseQuery アカウント取得UseCase
+     */
+    private $accountQuery;
+
+    /**
+     * @param AccountUseCaseCommand アカウント操作UseCase
+     */
+    public function __construct(
+        AccountUseCaseCommand $accountCommand,
+        AccountUseCaseQuery $accountQuery
+    ) {
         $this->accountCommand = $accountCommand;
+        $this->accountQuery = $accountQuery;
     }
 
-    public function __invoke(Guest $guest): Stylist
+    /**
+     * @param Guest ゲストアカウント
+     */
+    public function __invoke(Guest $guest)
     {
-        return $this->accountCommand->save($guest);
+        $account = $this->accountCommand->save($guest);
+
+        if (! $isSaved) return;
+        
+        $this->accountQuery->login(
+            $account->emailAddress(),
+            $account->password()
+        );
+        
     }
 }

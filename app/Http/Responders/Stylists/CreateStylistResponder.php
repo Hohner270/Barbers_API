@@ -18,7 +18,7 @@ class CreateStylistResponder
         if (! $stylist) {
             return new JsonResponse(
                 [
-                    'error' => 'failed to create stylist account',
+                    'message' => 'failed to create stylist account',
                 ], 
                 Response::HTTP_BAD_REQUEST
             );

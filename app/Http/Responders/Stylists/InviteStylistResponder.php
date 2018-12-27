@@ -8,23 +8,26 @@ use Illuminate\Http\Response;
 class InviteStylistResponder
 {
     /**
-     * @param bool 招待メールが送信されたか
+     * アプリケーション例外のみ扱う。
+     * @param string 招待トークン
      * @return JsonResponse
      */
-    public function __invoke(bool $isSent): JsonResponse
+    public function __invoke($invitationToken): JsonResponse
     {
-        if (! $isSent) {
+        if (! $invitationToken) {
             return new JsonResponse(
                 [
-                    'error' => 'failed to send invite mail',
+                    'message' => 'failed to send invite mail',
                 ], 
-                Response::HTTP_BAD_REQUEST
+                Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
 
         return new JsonResponse(
-            [], 
-            Response::HTTP_NO_CONTENT
+            [
+                'invitaion_token' => $invitationToken,
+            ], 
+            Response::HTTP_OK
         );
     }
 }

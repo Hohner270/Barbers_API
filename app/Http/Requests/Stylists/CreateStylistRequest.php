@@ -36,9 +36,9 @@ class CreateStylistRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        $responder = \App::make(CreateStylistResponder::class);
-        throw new HttpResponseException($responder(null));
-    }
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     $responder = \App::make(CreateStylistResponder::class);
+    //     throw new HttpResponseException($responder(null));
+    // }
 }

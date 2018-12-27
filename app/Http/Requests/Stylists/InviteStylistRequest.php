@@ -32,13 +32,13 @@ class InviteStylistRequest extends FormRequest
         ];
     }
 
-    /**
-     * バリデーション失敗時、json返却
-     * @param Validator
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        $responder = \App::make(InviteStylistResponder::class);
-        throw new HttpResponseException($responder(false));
-    }
+    // /**
+    //  * バリデーション失敗時、json返却
+    //  * @param Validator
+    //  */
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     $responder = \App::make(InviteStylistResponder::class);
+    //     throw new HttpResponseException($responder(false));
+    // }
 }

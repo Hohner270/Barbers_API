@@ -18,7 +18,13 @@ class InviteAction extends Controller
      * @bodyParam email string required 招待されるユーザーのメールアドレス Example: example@exam.com
      * @response 204 {}
      * @response 400 {
-     *  "error": "failed to send invite mail"
+     *  "message":"The given data was invalid.",
+     *  "errors":{
+     *      "email":["The email must be a valid email address."]
+     *  }
+     * }
+     * @response 500 {
+     *  "message": "failed to send invite mail"
      * }
      * @param InviteStylistRequest
      * @param InviteStylistUseCase アカウント招待ユースケース
@@ -30,8 +36,8 @@ class InviteAction extends Controller
         InviteStylistResponder $inviteStylistResponder
     ) {
         $email = new EmailAddress($request->email);
-        $isSent = $inviteStylistUseCase($email);
+        $invitationToken = $inviteStylistUseCase($email);
 
-        return $inviteStylistResponder($isSent);
+        return $inviteStylistResponder($invitationToken);
     }
 }
