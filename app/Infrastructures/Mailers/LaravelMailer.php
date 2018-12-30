@@ -4,8 +4,8 @@ namespace App\Infrastructures\Mailers;
 
 use Illuminate\Mail\Mailer;
 
-use App\Domains\Models\Email\Email;
-use App\Domains\Models\BaseToken\HashedToken;
+use App\Domains\Models\Account\BaseAccount\AccountName;
+use App\Domains\Models\Account\Stylist\Guest;
 
 use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
 use App\Infrastructures\Entities\Mails\Accounts\InviteAccountMail;
@@ -27,20 +27,18 @@ class LaravelMailer implements MailerUseCaseCommand
     }
 
     /**
-     * @param Email Emailドメイン
-     * @return bool
+     * @param Guest ゲスト
+     * @return void
      */
-    public function sendInviteMail(Email $email, HashedToken $token): bool
+    public function sendInvitationMail(Guest $guest): void
     {
         $inviteAccountMail = new InviteAccountMail(
-            $email->senderName()->value(),
-            $token->value()
+            $guest->inviterName()->value(),
+            $guest->token()->value()
         );
 
         $this->mailer
-            ->to($email->to()->value())
+            ->to($guest->emailAddress()->value())
             ->send($inviteAccountMail);
-
-        return true;
     }
 }

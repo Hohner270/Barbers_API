@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Models\BaseAccount;
+namespace App\Domains\Models\Account\Member;
 
 use App\Domains\Models\BaseAccount\AccountId;
 use App\Domains\Models\BaseAccount\AccoutName;
@@ -9,7 +9,7 @@ use App\Domains\Models\BaseAccount\AccoutHashedPassword;
 
 use App\Domains\Models\Email\EmailAddress;
 
-class Member
+class Member extends Account
 {
     /**
      * @var AccountId $id

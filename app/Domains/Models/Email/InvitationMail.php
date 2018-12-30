@@ -4,8 +4,9 @@ namespace App\Domains\Models\Email;
 
 use App\Domains\Models\BaseAccount\AccountName;
 use App\Domains\Models\Email\EmailAddress;
+use App\Domains\Models\Hash;
 
-class Email
+class InvitationMail
 {
     /**
      * @var AccountName 送信者名
@@ -13,25 +14,24 @@ class Email
     private $accountName;
 
     /**
-     * @var EmailAddress 送信者メールアドレス
-     */
-    private $from;
-
-    /**
      * @var EmailAddress 受信者メールアドレス
      */
     private $to;
 
     /**
+     * @var Hash 招待トークン
+     */
+    private $token;
+
+    /**
      * @param AccountName 送信者名
-     * @param EmailAddress 送信者メールアドレス
      * @param EmailAddress 受信者メールアドレス
      */
-    public function __construct(AccountName $accountName, EmailAddress $from, EmailAddress $to)
+    public function __construct(AccountName $accountName, EmailAddress $to)
     {
         $this->accountName = $accountName;
-        $this->from = $from;
         $this->to = $to;
+        $this->token = new Hash(uniqid(rand(), true));
     }
 
     /**
@@ -56,5 +56,10 @@ class Email
     public function to(): EmailAddress
     {
         return $this->to;
+    }
+
+    public function token(): Hash
+    {
+        return $this->token;
     }
 }

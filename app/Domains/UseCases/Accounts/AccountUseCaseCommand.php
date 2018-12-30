@@ -2,12 +2,9 @@
 
 namespace App\Domains\UseCases\Accounts;
 
-use App\Domains\Models\Account\Guest;
-
 use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\BaseAccount\AccountId;
-use App\Domains\Models\Email\EmailAddress;
-use App\Domains\Models\BaseToken\HashedToken;
+use App\Domains\Models\Account\Stylist\Guest;
 
 interface AccountUseCaseCommand
 {
@@ -18,10 +15,9 @@ interface AccountUseCaseCommand
     public function save(Guest $guest): Account;
 
     /**
-     * @param AccountId 招待者のアカウントID
-     * @param EmailAddress 招待したメールアドレス
-     * @param HashedToken 招待トークン
+     * @param AccountId アカウントID
+     * @param Guest ゲスト
      * @return bool
      */
-    public function saveInvitationToken(AccountId $accountId, EmailAddress $email, HashedToken $token): bool;
+    public function saveGuest(AccountId $accountId, Guest $guest): bool;
 }

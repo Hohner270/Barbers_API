@@ -4,17 +4,17 @@ namespace App\Infrastructures\Entities\Eloquents;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentInvitationToken extends Model
+class EloquentGuest extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'invitation_tokens';
+    protected $table = 'guests';
 
     /**
      * @var array
      */
     protected $fillable = [
-        'user_id', 'email', 'token',
+        'user_id', 'email', 'token', 'introduction'
     ];
 }

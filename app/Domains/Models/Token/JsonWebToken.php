@@ -2,7 +2,7 @@
 
 namespace App\Domains\Models\Token;
 
-use App\Domains\Models\BaseToken\TimeToLive;
+use App\Domains\Models\Token\TimeToLive;
 use App\Domains\Models\BaseToken\HashedToken;
 
 class JsonWebToken
@@ -23,7 +23,7 @@ class JsonWebToken
     public function __construct(HashedToken $hashedToken, TimeToLive $ttl)
     {
         $this->hashedToken = $hashedToken;
-        $this->token = $ttl;
+        $this->ttl = $ttl;
     }
 
     public function token(): HashedToken

@@ -2,14 +2,14 @@
 
 namespace App\Domains\UseCases\Mailers;
 
-use App\Domains\Models\Email\Email;
-use App\Domains\Models\BaseToken\HashedToken;
+use App\Domains\Models\Account\Stylist\Guest;
 
 interface MailerUseCaseCommand
 {
     /**
-     * @param Email Emailドメイン
-     * @param HashedToken 招待トークン
+     * @param AccountName 招待者
+     * @param Guest ゲスト
+     * @return void
      */
-    public function sendInviteMail(Email $email, HashedToken $token);
+    public function sendInvitationMail(Guest $guest): void;
 }

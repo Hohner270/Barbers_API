@@ -5,16 +5,14 @@ namespace App\Infrastructures\Repositories\Eloquents;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-use App\Domains\Models\Account\Guest;
 use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\BaseAccount\AccountId;
-use App\Domains\Models\Email\EmailAddress;
-use App\Domains\Models\BaseToken\HashedToken;
+use App\Domains\Models\Account\Stylist\Guest;
 
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
 
 use App\Infrastructures\Entities\Eloquents\EloquentUser;
-use App\Infrastructures\Entities\Eloquents\EloquentInvitationToken;
+use App\Infrastructures\Entities\Eloquents\EloquentGuest;
 
 class EloquentAccountCommandRepository implements AccountUseCaseCommand
 {
@@ -24,20 +22,20 @@ class EloquentAccountCommandRepository implements AccountUseCaseCommand
     private $eloquentUser;
 
     /**
-     * @var EloquentInvitationToken
+     * @var EloquentGuest
      */
-    private $eloquentInvitationToken;
+    private $eloquentGuest;
 
     /**
      * @param EloquentUser
-     * @param EloquentInvitationToken
+     * @param EloquentGuest
      */
     public function __construct(
         EloquentUser $eloquentUser, 
-        EloquentInvitationToken $eloquentInvitationToken
+        EloquentGuest $eloquentGuest
     ) {
         $this->eloquentUser = $eloquentUser;
-        $this->eloquentInvitationToken = $eloquentInvitationToken;
+        $this->eloquentGuest = $eloquentGuest;
     }
 
     /**
@@ -61,27 +59,23 @@ class EloquentAccountCommandRepository implements AccountUseCaseCommand
     }
 
     /**
-     * @param AccountId 招待者のアカウントID
-     * @param EmailAddress 招待したメールアドレス
-     * @param HashedToken 招待トークン
-     * @return bool DB保存 成功 / 失敗
+     * @param AccountId アカウントID
+     * @param Guest ゲスト
+     * @return bool
      */
-    public function saveInvitationToken(
-        AccountId $accountId, 
-        EmailAddress $emailAddress, 
-        HashedToken $token
-    ): bool {
-        $invitationToken = $this->eloquentInvitationToken->firstOrNew([
-                'user_id' => $accountId->value(),
-                'email' => $emailAddress->value(),
-                'token' => $token->value(),
+    public function saveGuest(AccountId $accountId, Guest $guest): bool
+    {
+        $guest = $this->eloquentGuest->firstOrNew([
+                'user_id'      => $accountId->value(),
+                'email'        => $guest->emailAddress()->value(),
+                'token'        => $guest->token()->value(),
+                'introduction' => $guest->introduction()->value(),
         ]);
 
-        if (! $invitationToken->wasRecentlyCreated) {
-            $invitationToken->updated_at = Carbon::now();
+        if (! $guest->wasRecentlyCreated) {
+            $guest->updated_at = Carbon::now();
         }
 
-        $isSaved = $invitationToken->save();
-        return $isSaved;
+        return $guest->save();
     }
 }

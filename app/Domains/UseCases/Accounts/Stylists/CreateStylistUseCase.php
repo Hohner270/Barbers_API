@@ -3,7 +3,7 @@
 namespace App\Domains\UseCases\Accounts\Stylists;
 
 use App\Domains\Models\Account\Guest;
-use App\Domains\Models\Account\Stylist;
+use App\Domains\Models\Account\Stylist\Stylist;
 use App\Domains\Models\BaseAccount\AccountName;
 use App\Domains\Models\BaseAccount\AccountPassword;
 use App\Domains\Models\Email\EmailAddress;
