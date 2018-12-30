@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Models\BaseToken;
+namespace App\Domains\Models\Token;
 
 class TimeToLive
 {

@@ -5,7 +5,7 @@ namespace App\Http\Responders\Stylists;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-use App\Domains\Models\Account\Stylist;
+use App\Domains\Models\Account\Stylist\Stylist;
 
 class CreateStylistResponder
 {

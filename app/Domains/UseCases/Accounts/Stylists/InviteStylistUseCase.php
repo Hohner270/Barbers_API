@@ -2,14 +2,13 @@
 
 namespace App\Domains\UseCases\Accounts\Stylists;
 
-use App\Domains\Models\Email\Email;
-use App\Domains\Models\Email\EmailAddress;
-use App\Domains\Models\BaseToken\HashedToken;
-
 use App\Domains\UseCases\Mailers\MailerUseCaseCommand;
 use App\Domains\UseCases\Accounts\AccountUseCaseQuery;
 use App\Domains\UseCases\Accounts\AccountUseCaseCommand;
 
+use App\Domains\Models\Hash;
+use App\Domains\Models\Email\EmailAddress;
+use App\Domains\Models\Account\Stylist\Introduction;
 
 class InviteStylistUseCase
 {
@@ -48,21 +47,14 @@ class InviteStylistUseCase
      * @param EmailAddress メールアドレス
      * @return InvitationToken 招待トークン
      */
-    public function __invoke(EmailAddress $to): HashedToken
+    public function __invoke(EmailAddress $emailAddress, Introduction $introduction): Hash
     {
-        $account = $this->accountQuery->myAccount();
-        $email = new Email($account->name(), $account->emailAddress(), $to);
-        $token = new HashedToken(uniqid(rand(), true));
+        $stylist = $this->accountQuery->myAccount();
+        $guest = $stylist->inviteGuest($emailAddress, $introduction);
+        
+        $isSaved = $this->accountCommand->saveGuest($stylist->id(), $guest);
+        $this->emailCommand->sendInvitationMail($guest);
 
-        $isSaved = $this->accountCommand->saveInvitationToken(
-            $account->id(),
-            $email->to(),
-            $token
-        );
-
-        if (! $isSaved) return $token;
-
-        $this->emailCommand->sendInviteMail($email, $token);
-        return $token;
+        return $guest->token();
     }
 }

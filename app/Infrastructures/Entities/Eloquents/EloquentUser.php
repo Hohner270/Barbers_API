@@ -9,10 +9,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Domains\Models\BaseAccount\Account;
 use App\Domains\Models\BaseAccount\AccountId;
 use App\Domains\Models\BaseAccount\AccountName;
-
-use App\Domains\Models\Account\Stylist;
-use App\Domains\Models\Account\Member;
-
+use App\Domains\Models\BaseAccount\AccountType;
 use App\Domains\Models\Email\EmailAddress;
 
 class EloquentUser extends Authenticatable implements JWTSubject
@@ -64,18 +61,13 @@ class EloquentUser extends Authenticatable implements JWTSubject
      */
     public function toDomain(): Account
     {
-        if ($this->role_id === Stylist::ACCOUNT_TYPE) {
-            return new Stylist(
-                new AccountId($this->id),
-                new AccountName($this->name),
-                new EmailAddress($this->email)
-            );
-        }
-        
-        return new Member(
+        $account = new Account(
             new AccountId($this->id),
             new AccountName($this->name),
-            new EmailAddress($this->email)
+            new EmailAddress($this->email),
+            new AccountType($this->role_id)
         );
+
+        return $account->getAccountType();
     }
 }

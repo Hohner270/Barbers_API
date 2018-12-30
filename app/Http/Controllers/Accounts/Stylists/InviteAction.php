@@ -9,6 +9,7 @@ use App\Http\Requests\Stylists\InviteStylistRequest;
 use App\Http\Responders\Stylists\InviteStylistResponder;
 
 use App\Domains\Models\Email\EmailAddress;
+use App\Domains\Models\Account\Stylist\Introduction;
 use App\Domains\UseCases\Accounts\Stylists\InviteStylistUseCase;
 
 
@@ -36,7 +37,8 @@ class InviteAction extends Controller
         InviteStylistResponder $inviteStylistResponder
     ) {
         $email = new EmailAddress($request->email);
-        $token = $inviteStylistUseCase($email);
+        $introduction = new Introduction($request->introduction);
+        $token = $inviteStylistUseCase($email, $introduction);
 
         return $inviteStylistResponder($token->value());
     }

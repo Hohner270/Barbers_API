@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvitationTokensTable extends Migration
+class CreateGuestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateInvitationTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('invitation_tokens', function (Blueprint $table) {
+        Schema::create('guests', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('token');
             $table->string('email');
+            $table->text('introduction');
             $table->timestamps();
         });
     }
